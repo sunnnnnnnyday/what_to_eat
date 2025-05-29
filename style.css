@@ -1,0 +1,67 @@
+body {
+  font-family: "Microsoft YaHei", sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  background-color: rgba(255, 255, 255, 0.01); /* 防止背景穿透问题 */
+}
+
+body::before {
+  content: "";
+  position: fixed; /* 固定定位确保不影响布局 */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('images/image.png'); /* 背景图路径 */
+  background-size: cover; /* 让图片覆盖整个容器 */
+  background-position: center; /* 居中显示 */
+  z-index: -1; /* 确保在所有内容下方 */
+  filter: blur(4px) brightness(0.8); /* 同时模糊+变暗背景 */
+  will-change: transform; /* 提升性能 */
+}
+
+.container {
+  position: relative;
+  width: 500px;
+  height: 500px;
+  background-color: rgba(255, 255, 255, 0.7); /* 添加半透明白色背景以增加对比度 */
+  border-radius: 50%; /* 圆形容器 */
+  overflow: hidden;
+  z-index: 1; /* 确保在背景和虚化层之上 */
+}
+
+.pointer {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-bottom: 40px solid red;
+  z-index: 10; /* 确保指针在最上层 */
+}
+
+button {
+  margin-top: 30px;
+  padding: 12px 24px;
+  font-size: 18px;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  z-index: 2; /* 确保按钮也在背景和虚化层之上 */
+}
+
+#wheel {
+  transition: transform 4s cubic-bezier(0.33, 1, 0.68, 1);
+}
